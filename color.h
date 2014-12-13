@@ -23,11 +23,25 @@ inline Color& operator+=(Color& c1, const Color& c2) {
   return c1;
 }
 
+inline Color& operator+=(Color& c, double s) {
+  c.r += s;
+  c.g += s;
+  c.b += s;
+  return c;
+}
+
 inline Color& operator-=(Color& c1, const Color& c2) {
   c1.r -= c2.r;
   c1.g -= c2.g;
   c1.b -= c2.b;
   return c1;
+}
+
+inline Color& operator-=(Color& c, double s) {
+  c.r -= s;
+  c.g -= s;
+  c.b -= s;
+  return c;
 }
 
 inline Color& operator*=(Color& c1, const Color& c2) {
@@ -44,6 +58,41 @@ inline Color& operator*=(Color& c, double s) {
   return c;
 }
 
+inline Color& operator/=(Color& c, double s) {
+  c.r /= s;
+  c.g /= s;
+  c.b /= s;
+  return c;
+}
+
+inline Color operator+(const Color& c1, const Color& c2) {
+  Color copy(c1);
+  copy += c2;
+  return copy;
+}
+
+inline Color operator+(const Color& c1, double s) {
+  Color copy(c1);
+  copy += s;
+  return copy;
+}
+
+inline Color operator+(double s, const Color& c1) {
+  return operator+(c1, s);
+}
+
+inline Color operator-(const Color& c1, const Color& c2) {
+  Color copy(c1);
+  copy -= c2;
+  return copy;
+}
+
+inline Color operator-(const Color& c, double s) {
+  Color copy(c);
+  copy -= s;
+  return copy;
+}
+
 inline Color operator*(const Color& c, double s) {
   Color copy(c);
   copy *= s;
@@ -52,6 +101,12 @@ inline Color operator*(const Color& c, double s) {
 
 inline Color operator*(double s, const Color& c) {
   return operator*(c, s);
+}
+
+inline Color operator/(const Color& c, double s) {
+  Color copy(c);
+  copy /= s;
+  return copy;
 }
 
 #endif

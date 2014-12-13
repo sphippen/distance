@@ -62,10 +62,24 @@ Vec<n>& operator+=(Vec<n>& v1, const Vec<n>& v2) {
 }
 
 template <int n>
+Vec<n>& operator+=(Vec<n>& v, double r) {
+  for (int i = 0; i < n; ++i)
+    v.data[i] += r;
+  return v;
+}
+
+template <int n>
 Vec<n>& operator-=(Vec<n>& v1, const Vec<n>& v2) {
   for (int i = 0; i < n; ++i)
     v1.data[i] -= v2.data[i];
   return v1;
+}
+
+template <int n>
+Vec<n>& operator-=(Vec<n>& v, double r) {
+  for (int i = 0; i < n; ++i)
+    v.data[i] -= r;
+  return v;
 }
 
 template <int n>
@@ -76,6 +90,46 @@ Vec<n>& operator*=(Vec<n>& v, double r) {
 }
 
 template <int n>
+Vec<n>& operator/=(Vec<n>& v, double r) {
+  for (int i = 0; i < n; ++i)
+    v.data[i] /= r;
+  return v;
+}
+
+template <int n>
+Vec<n> operator+(const Vec<n>& v1, const Vec<n>& v2) {
+  Vec<n> copy(v1);
+  copy += v2;
+  return copy;
+}
+
+template <int n>
+Vec<n> operator+(const Vec<n>& v, double r) {
+  Vec<n> copy(v);
+  copy += r;
+  return copy;
+}
+
+template <int n>
+Vec<n> operator+(double r, const Vec<n>& v) {
+  return operator+(v, r);
+}
+
+template <int n>
+Vec<n> operator-(const Vec<n>& v1, const Vec<n>& v2) {
+  Vec<n> copy(v1);
+  copy -= v2;
+  return copy;
+}
+
+template <int n>
+Vec<n> operator-(const Vec<n>& v, double r) {
+  Vec<n> copy(v);
+  copy -= r;
+  return copy;
+}
+
+template <int n>
 Vec<n> operator*(const Vec<n>& v, double r) {
   Vec<n> copy(v);
   copy *= r;
@@ -83,8 +137,15 @@ Vec<n> operator*(const Vec<n>& v, double r) {
 }
 
 template <int n>
-Vec<n>& operator*(double r, const Vec<n>& v) {
+Vec<n> operator*(double r, const Vec<n>& v) {
   return operator*(v, r);
+}
+
+template <int n>
+Vec<n> operator/(const Vec<n>& v, double r) {
+  Vec<n> copy(v);
+  copy /= r;
+  return copy;
 }
 
 template <int n>
@@ -121,8 +182,8 @@ struct Vec<2> {
 
   void normalize() {
     double factor = 1.0 / length();
-    x /= factor;
-    y /= factor;
+    x *= factor;
+    y *= factor;
   }
 
   Vec<2> normalized() const {
@@ -163,9 +224,9 @@ struct Vec<3> {
 
   void normalize() {
     double factor = 1.0 / length();
-    x /= factor;
-    y /= factor;
-    z /= factor;
+    x *= factor;
+    y *= factor;
+    z *= factor;
   }
 
   Vec<3> normalized() const {
@@ -215,10 +276,10 @@ struct Vec<4> {
 
   void normalize() {
     double factor = 1.0 / length();
-    x /= factor;
-    y /= factor;
-    z /= factor;
-    w /= factor;
+    x *= factor;
+    y *= factor;
+    z *= factor;
+    w *= factor;
   }
 
   Vec<4> normalized() const {
