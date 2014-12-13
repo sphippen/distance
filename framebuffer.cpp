@@ -15,11 +15,11 @@ namespace distance {
 FrameBuffer::FrameBuffer(int width, int height) : width_(width), height_(height), data_(width*height) {}
 
 Color& FrameBuffer::operator()(int x, int y) {
-  return data_[x*width_ + y];
+  return data_[y*width_ + x];
 }
 
 const Color& FrameBuffer::operator()(int x, int y) const {
-  return data_[x*width_ + y];
+  return data_[y*width_ + x];
 }
 
 bool FrameBuffer::writeToFile(const char* fileName) {
