@@ -13,6 +13,6 @@ $(BIN) : $(OBJS)
 
 .PHONY: clean
 clean:
-	rm -rf $(DEPENDS) $(OBJS) $(BIN)
+	rm -rf $(DEPENDS) $(OBJS) $(BIN) out*
 
 -include ${DEPENDS}
