@@ -4,18 +4,21 @@
 
 #include <cstdio>
 
-#include "framebuffer.h"
+#include "scene.h"
 
 namespace distance {
 
 int main(int argc, char* argv[]) {
-  FrameBuffer b(512, 512);
-  for (int i = 0; i < 512; ++i) {
-    for (int j = 0; j < 512; ++j) {
-      b(i, j) = Color(i / 512.0, j / 512.0, 0.0);
-    }
-  }
-  b.writeToFile("test.png");
+  const char* filename = "out.png";
+  if (argc == 2)
+    filename = argv[1];
+
+  Scene s;
+  if (s.renderScene(filename))
+    std::printf("File written to \"%s\"\n", filename);
+  else
+    std::printf("File \"%s\" couldn't be written...\n", filename);
+
   return 0;
 }
 
