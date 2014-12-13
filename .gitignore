@@ -1,0 +1,7 @@
+*.o
+*.d
+*.swp
+*~
+*.png
+distance
+.DS_Store
